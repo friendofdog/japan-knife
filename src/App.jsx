@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import steels from './data/steels.yaml';
+import steels from './data/steels.js';
 import { CATEGORIES, CATEGORY_LABELS } from './constants/categories';
 import Legend from './components/Legend';
 import SteelTable from './components/SteelTable';
@@ -27,8 +27,10 @@ export default function App() {
     if (!sort.col) return filtered;
 
     return [...filtered].sort((a, b) => {
-      const valA = a[sort.col]?.val ?? 0;
-      const valB = b[sort.col]?.val ?? 0;
+      const rawA = a[sort.col];
+      const rawB = b[sort.col];
+      const valA = typeof rawA === 'object' ? rawA.val : rawA ?? 0;
+      const valB = typeof rawB === 'object' ? rawB.val : rawB ?? 0;
       return sort.dir === 'asc' ? valA - valB : valB - valA;
     });
   }, [category, sort]);
