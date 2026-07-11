@@ -6,6 +6,8 @@ const ICON_BY_CATEGORY = Object.fromEntries(
   CATEGORY_META.map(({ key, icon }) => [key, icon])
 );
 
+const METER_COLS = new Set(['maxSharpness', 'corrosionRes', 'edgeRetention', 'toughness', 'easeOfSharp']);
+
 export default function SteelTable({ steels, columns, sort, onSort }) {
   return (
     <div className="table-container">
@@ -49,6 +51,13 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                   );
                 }
                 const { label, tier } = getRating(col.key, val);
+                if (METER_COLS.has(col.key)) {
+                  return (
+                    <td key={col.key}>
+                      <meter min={0} max={10} low={3.5} high={7.5} optimum={10} value={val} title={label} />
+                    </td>
+                  );
+                }
                 return (
                   <td key={col.key}>
                     <Badge tier={tier} label={label} />
