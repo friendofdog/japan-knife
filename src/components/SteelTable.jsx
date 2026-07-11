@@ -1,0 +1,63 @@
+import { CATEGORY_META } from '../constants/categories';
+import Badge from './Badge';
+
+const ICON_BY_CATEGORY = Object.fromEntries(
+  CATEGORY_META.map(({ key, icon }) => [key, icon])
+);
+
+export default function SteelTable({ steels, columns, sort, onSort }) {
+  return (
+    <div className="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Steel Type</th>
+            {columns.map(col => {
+              const active = sort.col === col.key;
+              const cls = [
+                'sortable',
+                active && sort.dir === 'asc' && 'sort-asc',
+                active && sort.dir === 'desc' && 'sort-desc',
+              ].filter(Boolean).join(' ');
+              return (
+                <th key={col.key} className={cls} onClick={() => onSort(col.key)}>
+                  {col.label}
+                </th>
+              );
+            })}
+            <th>Intended Use &amp; Characteristics</th>
+          </tr>
+        </thead>
+        <tbody>
+          {steels.map(steel => (
+            <tr key={steel.name}>
+              <td>
+                <div className="steel-cell">
+                  <span className="steel-icon">{ICON_BY_CATEGORY[steel.category]}</span>
+                  <div>
+                    <span className="steel-name">{steel.name}</span>
+                    <span className="steel-sub">{steel.sub}</span>
+                  </div>
+                </div>
+              </td>
+              {columns.map(col => {
+                const cell = steel[col.key];
+                if (col.key === 'maxHardness') {
+                  return (
+                    <td key={col.key} className="metric">{cell.label}</td>
+                  );
+                }
+                return (
+                  <td key={col.key}>
+                    <Badge tier={cell.tier} label={cell.label} />
+                  </td>
+                );
+              })}
+              <td>{steel.use}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
