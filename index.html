@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Knife Steel Interactive Matrix</title>
+    <style>
+        :root {
+            --bg-color: #faf9f6;
+            --header-bg: #1a252c;
+            --accent-color: #8e2323;
+            --text-color: #2c2c2c;
+            --table-header-bg: #2c3e50;
+            --border-color: #e0e0e0;
+            
+            --high-bg: #e8f5e9;
+            --high-text: #2e7d32;
+            --med-bg: #fff3e0;
+            --med-text: #ef6c00;
+            --low-bg: #ffebee;
+            --low-text: #c62828;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: #ffffff;
+            padding: 24px;
+            border-radius: 8px;
+            border-bottom: 4px solid var(--accent-color);
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            margin: 6px 0 0 0;
+            font-size: 14px;
+            color: #b0bec5;
+            font-style: italic;
+        }
+
+        .controls-container {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .table-container {
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 12px 10px;
+            border: 1px solid #34495e;
+            white-space: nowrap;
+        }
+
+        th.sortable {
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            padding-right: 24px;
+        }
+
+        th.sortable:hover {
+            background-color: #34495e;
+        }
+
+        th.sortable::after {
+            content: '↕';
+            position: absolute;
+            right: 8px;
+            color: #b0bec5;
+            opacity: 0.5;
+        }
+
+        th.sort-asc::after {
+            content: '↑';
+            opacity: 1;
+            color: #fff;
+        }
+
+        th.sort-desc::after {
+            content: '↓';
+            opacity: 1;
+            color: #fff;
+        }
+
+        td {
+            padding: 10px 10px;
+            border: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover td {
+            background-color: #f1f5f9;
+        }
+
+        .steel-cell {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .steel-icon {
+            font-size: 16px;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .steel-name {
+            font-weight: bold;
+            color: var(--header-bg);
+        }
+
+        .steel-sub {
+            font-size: 11px;
+            color: #666;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 3px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .high { background-color: var(--high-bg); color: var(--high-text); }
+        .med { background-color: var(--med-bg); color: var(--med-text); }
+        .low { background-color: var(--low-bg); color: var(--low-text); }
+
+        .metric {
+            font-weight: 600;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            padding: 10px 16px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #78909c;
+            text-align: right;
+            border-top: 1px solid #cfd8dc;
+            padding-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Japanese Knife Steel Reference Guide</h1>
+    <div class="subtitle">Interactive metallurgical matrix spanning carbon, stainless, semi-stainless, and powder compositions</div>
+</header>
+
+<div class="controls-container">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter">
+        <option value="all">Show All Categories</option>
+        <option value="high-carbon">High-Carbon Steels (Hagane)</option>
+        <option value="stainless">Conventional Stainless Steels</option>
+        <option value="semi-stainless">Semi-Stainless & Tool Steels</option>
+        <option value="powder-metallurgy">Powdered Metallurgy Steels (PM)</option>
+    </select>
+</div>
+
+<div class="legend">
+    <span>🔨 High-Carbon</span>
+    <span>🛡️ Conventional Stainless</span>
+    <span>⚙️ Semi-Stainless</span>
+    <span>💎 Powder Metallurgy</span>
+</div>
+
+<div class="table-container">
+    <table id="steelTable">
+        <thead>
+            <tr>
+                <th>Steel Type</th>
+                <th class="sortable" data-col="max-sharpness" data-type="score">Max Sharpness</th>
+                <th class="sortable" data-col="corrosion-res" data-type="score">Corrosion Res.</th>
+                <th class="sortable" data-col="edge-retention" data-type="score">Edge Retention</th>
+                <th class="sortable" data-col="toughness" data-type="score">Toughness</th>
+                <th class="sortable" data-col="ease-of-sharp" data-type="score">Ease of Sharp.</th>
+                <th class="sortable" data-col="max-hardness" data-type="number">Max Hardness</th>
+                <th class="sortable" data-col="cost" data-type="score">Relative Cost</th>
+                <th class="sortable" data-col="lifespan" data-type="score">Lifespan</th>
+                <th>Intended Use & Characteristics</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Data Rows with default ordering, score data attributes, and category mapping -->
+            <tr data-category="high-carbon" data-index="1">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">White #1</span>
+                            <span class="steel-sub">Shirogami</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="5"><span class="badge high">Extreme</span></td>
+                <td data-val="1"><span class="badge low">Very Low</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="1"><span class="badge low">Low (Brittle)</span></td>
+                <td data-val="5"><span class="badge high">Excellent</span></td>
+                <td data-val="64.5" class="metric">64–65 HRC</td>
+                <td data-val="4"><span class="badge med">Premium</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Ultra-delicate slicing (Yanagiba/Usuba). Offers the keenest geometric edge possible but chips easily.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="2">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">White #2</span>
+                            <span class="steel-sub">Shirogami</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="1"><span class="badge low">Very Low</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="5"><span class="badge high">Excellent</span></td>
+                <td data-val="62" class="metric">61–63 HRC</td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>General purpose traditional blades (Gyuto, Santoku). A highly popular, purist workhorse carbon steel.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="3">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">White #3</span>
+                            <span class="steel-sub">Shirogami</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="3"><span class="badge med">Good</span></td>
+                <td data-val="1"><span class="badge low">Very Low</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="5"><span class="badge high">Very Easy</span></td>
+                <td data-val="59" class="metric">58–60 HRC</td>
+                <td data-val="1"><span class="badge low">Budget</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Entry-level traditional knives. Highly forgiving to forge and sharpen, structurally stable.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="4">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">Blue #1</span>
+                            <span class="steel-sub">Aogami</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="2"><span class="badge low">Low</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="63.5" class="metric">63–64 HRC</td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>High-end precision slicing and push-cutting. Holds its candy, biting edge notably longer than White steel.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="5">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">Blue #2</span>
+                            <span class="steel-sub">Aogami</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="2"><span class="badge low">Low</span></td>
+                <td data-val="4"><span class="badge high">Good-High</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="62" class="metric">61–63 HRC</td>
+                <td data-val="4"><span class="badge med">Premium</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>All-around master smith kitchen knives. Incredible balance of edge-life, toughness, and crisp whetstone feedback.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="6">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">Aogami Super</span>
+                            <span class="steel-sub">Blue Super</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="5"><span class="badge high">Extreme</span></td>
+                <td data-val="2"><span class="badge low">Low</span></td>
+                <td data-val="5"><span class="badge high">Extreme</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="2"><span class="badge med">Demanding</span></td>
+                <td data-val="64" class="metric">63–65 HRC</td>
+                <td data-val="5"><span class="badge high">Very High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Boutique custom knives for extended slicing/dicing sessions. Exceptional peak wear resistance for a carbon steel.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="7">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">Tamahagane</span>
+                            <span class="steel-sub">Traditional Jewel Steel</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="0"><span class="badge low">Extreme Low</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="5"><span class="badge high">Excellent</span></td>
+                <td data-val="60" class="metric">59–61 HRC</td>
+                <td data-val="6"><span class="badge high">Astronomical</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Ultra-exclusive collector pieces and custom swords. Culturally significant, forged from iron sands.</td>
+            </tr>
+            <tr data-category="high-carbon" data-index="8">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="High-Carbon Steel">🔨</span>
+                        <div>
+                            <span class="steel-name">SK Steels</span>
+                            <span class="steel-sub">SK3, SK4, SK5</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="3"><span class="badge med">Good</span></td>
+                <td data-val="1"><span class="badge low">Very Low</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="5"><span class="badge high">High</span></td>
+                <td data-val="5"><span class="badge high">Very Easy</span></td>
+                <td data-val="59" class="metric">58–60 HRC</td>
+                <td data-val="1"><span class="badge low">Low</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>Heavy butchering tools, budget Honesuki, or utility kitchen knives. Highly durable and takes abuse well.</td>
+            </tr>
+            
+            <!-- STAINLESS -->
+            <tr data-category="stainless" data-index="9">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">VG-10</span>
+                            <span class="steel-sub">Takefu Premium</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="3.5"><span class="badge med">Good-High</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="3.5"><span class="badge med">Good</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="61" class="metric">60–62 HRC</td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>Mass-market premium home/commercial line Gyutos. Prone to micro-chipping if misused; can feel slightly gummy to sharpen.</td>
+            </tr>
+            <tr data-category="stainless" data-index="10">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">VG-1 / VG-5</span>
+                            <span class="steel-sub">Resilient Stainless</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="2.5"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="59" class="metric">58–60 HRC</td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>Entry-to-mid level commercial kitchen knives. Harder to chip, making them excellent utility options.</td>
+            </tr>
+            <tr data-category="stainless" data-index="11">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">Ginsan</span>
+                            <span class="steel-sub">Silver No. 3</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="3.5"><span class="badge med">Good</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="4.5"><span class="badge high">Easy</span></td>
+                <td data-val="60.5" class="metric">59–62 HRC</td>
+                <td data-val="4"><span class="badge med">Premium</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Professional low-maintenance chef knives. Behave almost identically to carbon steel on whetstones.</td>
+            </tr>
+            <tr data-category="stainless" data-index="12">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">AUS-10</span>
+                            <span class="steel-sub">Aichi Premium</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="3.5"><span class="badge med">Good-High</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="3.5"><span class="badge med">Good</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="60" class="metric">59–61 HRC</td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>Robust daily prep. A popular alternative to VG-10 providing better overall structural integrity.</td>
+            </tr>
+            <tr data-category="stainless" data-index="13">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">AUS-8</span>
+                            <span class="steel-sub">Aichi Workhorse</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="2.5"><span class="badge med">Moderate</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="5.5"><span class="badge high">Very High</span></td>
+                <td data-val="5"><span class="badge high">Very Easy</span></td>
+                <td data-val="58" class="metric">57–59 HRC</td>
+                <td data-val="1"><span class="badge low">Low</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>Introductory culinary school knives or heavy line use. Exceptionally forgiving against impacts and bone contact.</td>
+            </tr>
+            <tr data-category="stainless" data-index="14">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Stainless Steel">🛡️</span>
+                        <div>
+                            <span class="steel-name">Molybdenum</span>
+                            <span class="steel-sub">Swedish Inox Blends</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="2.5"><span class="badge med">Moderate</span></td>
+                <td data-val="5"><span class="badge high">Very High</span></td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="5"><span class="badge high">High</span></td>
+                <td data-val="4.5"><span class="badge high">Easy</span></td>
+                <td data-val="57.5" class="metric">56–59 HRC</td>
+                <td data-val="2"><span class="badge low">Low-Med</span></td>
+                <td data-val="4"><span class="badge med">Long</span></td>
+                <td>High-volume commercial restaurant lines (e.g., Misono, MAC). Prioritizes resilience, speed-sharpening, and stain-immunity.</td>
+            </tr>
+
+            <!-- SEMI-STAINLESS -->
+            <tr data-category="semi-stainless" data-index="15">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Semi-Stainless Steel">⚙️</span>
+                        <div>
+                            <span class="steel-name">SLD</span>
+                            <span class="steel-sub">Fine Carbide Die Steel</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="4"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="3"><span class="badge med">Medium</span></td>
+                <td data-val="62" class="metric">61–63 HRC</td>
+                <td data-val="3.5"><span class="badge med">Mod-High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Versatile all-rounder for Gyutos and Santokus. Finer carbide structure yields a crisp, aggressive edge with good corrosion resistance.</td>
+            </tr>
+            <tr data-category="semi-stainless" data-index="16">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Semi-Stainless Steel">⚙️</span>
+                        <div>
+                            <span class="steel-name">SKD / SKD11</span>
+                            <span class="steel-sub">Coarse Carbide Die Steel</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="3.5"><span class="badge med">Very Good</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="5"><span class="badge high">Exceptional</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="2"><span class="badge low">Med-Difficult</span></td>
+                <td data-val="61" class="metric">60–62 HRC</td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Workhorse for continuous slicing of proteins and vegetables. Massive chromium carbides give exceptional abrasive wear resistance; avoid bones.</td>
+            </tr>
+            <tr data-category="semi-stainless" data-index="17">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Semi-Stainless Steel">⚙️</span>
+                        <div>
+                            <span class="steel-name">Chromax</span>
+                            <span class="steel-sub">V/Mo Semi-Stainless</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4.5"><span class="badge high">Exceptional</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="4.5"><span class="badge high">Excellent+</span></td>
+                <td data-val="2"><span class="badge low">Mod-Low</span></td>
+                <td data-val="2"><span class="badge low">Med-Difficult</span></td>
+                <td data-val="64.5" class="metric">64–65+ HRC</td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="4.5"><span class="badge high">Long-V.Long</span></td>
+                <td>Precision slicing for fine vegetable prep and delicate portioning. Laser-like edge from extreme matrix hardness; prone to chipping if twisted.</td>
+            </tr>
+
+            <!-- PM -->
+            <tr data-category="powder-metallurgy" data-index="18">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Powder Metallurgy Steel">💎</span>
+                        <div>
+                            <span class="steel-name">SG2 / R2</span>
+                            <span class="steel-sub">Sintered Stainless</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4.5"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="4.5"><span class="badge high">Very High</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="63" class="metric">62–64 HRC</td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>High-end daily culinary showpieces. Phenomenal edge life mixed with highly consistent refinement across the edge.</td>
+            </tr>
+            <tr data-category="powder-metallurgy" data-index="19">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Powder Metallurgy Steel">💎</span>
+                        <div>
+                            <span class="steel-name">ZDP-189</span>
+                            <span class="steel-sub">Hyper-Alloy PM</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4.5"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="6"><span class="badge high">Extreme</span></td>
+                <td data-val="0.5"><span class="badge low">Extreme Low</span></td>
+                <td data-val="1"><span class="badge low">Very Difficult</span></td>
+                <td data-val="66" class="metric">65–67 HRC</td>
+                <td data-val="5"><span class="badge high">Very High</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td>Strictly delicate slicing. Holds an edge for months, but highly susceptible to brittle fractures if twisted or dropped.</td>
+            </tr>
+            <tr data-category="powder-metallurgy" data-index="20">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Powder Metallurgy Steel">💎</span>
+                        <div>
+                            <span class="steel-name">HAP-40</span>
+                            <span class="steel-sub">Hitachi Tool PM</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4.5"><span class="badge high">Excellent</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="6"><span class="badge high">Extreme</span></td>
+                <td data-val="5"><span class="badge high">High</span></td>
+                <td data-val="1.5"><span class="badge low">Difficult</span></td>
+                <td data-val="65" class="metric">64–66 HRC</td>
+                <td data-val="5"><span class="badge high">Very High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>High-volume commercial processing. Unrivaled wear resistance and structural toughness among high-HRC choices.</td>
+            </tr>
+            <tr data-category="powder-metallurgy" data-index="21">
+                <td>
+                    <div class="steel-cell">
+                        <span class="steel-icon" title="Powder Metallurgy Steel">💎</span>
+                        <div>
+                            <span class="steel-name">SRS-13 / SRS-15</span>
+                            <span class="steel-sub">Tungsten PM Blend</span>
+                        </div>
+                    </div>
+                </td>
+                <td data-val="4.5"><span class="badge high">Excellent</span></td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="4.5"><span class="badge high">Very High</span></td>
+                <td data-val="4"><span class="badge med">Good</span></td>
+                <td data-val="3"><span class="badge med">Moderate</span></td>
+                <td data-val="63.5" class="metric">63–64 HRC</td>
+                <td data-val="4"><span class="badge high">High</span></td>
+                <td data-val="5"><span class="badge high">Very Long</span></td>
+                <td>Premium multi-purpose chef knives. Known for a crisp, bright cutting action and highly stable edge holding.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    Japanese Knife Steel Performance Matrices • Interactive Reference Chart
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const selectFilter = document.getElementById('categoryFilter');
+        const tableBody = document.getElementById('tableBody');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        const headers = Array.from(document.querySelectorAll('th.sortable'));
+
+        let currentSortColumn = null;
+        let currentSortOrder = 'asc'; // 'asc' or 'desc'
+
+        // --- Category Filtering ---
+        selectFilter.addEventListener('change', (e) => {
+            const selectedCategory = e.target.value;
+            rows.forEach(row => {
+                if (selectedCategory === 'all' || row.getAttribute('data-category') === selectedCategory) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // --- Multi-Column Sorting ---
+        headers.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                const colIndex = header.cellIndex;
+                const dataType = header.getAttribute('data-type');
+                
+                // Determine sort direction
+                if (currentSortColumn === colIndex) {
+                    if (currentSortOrder === 'asc') {
+                        currentSortOrder = 'desc';
+                    } else if (currentSortOrder === 'desc') {
+                        // Reset to default document order on third click
+                        currentSortOrder = 'default';
+                        currentSortColumn = null;
+                    }
+                } else {
+                    currentSortColumn = colIndex;
+                    currentSortOrder = 'asc';
+                }
+
+                // Update UI header class indicators
+                headers.forEach(h => {
+                    h.classList.remove('sort-asc', 'sort-desc');
+                });
+                if (currentSortOrder === 'asc') header.classList.add('sort-asc');
+                if (currentSortOrder === 'desc') header.classList.add('sort-desc');
+
+                // Sort the rows
+                const sortedRows = rows.sort((a, b) => {
+                    if (currentSortOrder === 'default') {
+                        // Restore default hierarchy order using pre-baked indexing
+                        return parseInt(a.getAttribute('data-index')) - parseInt(b.getAttribute('data-index'));
+                    }
+
+                    const cellA = a.cells[colIndex];
+                    const cellB = b.cells[colIndex];
+                    
+                    let valA = parseFloat(cellA.getAttribute('data-val'));
+                    let valB = parseFloat(cellB.getAttribute('data-val'));
+
+                    if (currentSortOrder === 'asc') {
+                        return valA - valB;
+                    } else {
+                        return valB - valA;
+                    }
+                });
+
+                // Append sorted DOM fragments back into tbody
+                sortedRows.forEach(row => tableBody.appendChild(row));
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
