@@ -38,10 +38,10 @@ export default function App() {
   const handleSort = (col) => {
     setSort(prev => {
       if (prev.col === col) {
-        if (prev.dir === 'asc') return { col, dir: 'desc' };
-        return { col: null, dir: 'asc' };
+        if (prev.dir === 'desc') return { col, dir: 'asc' };
+        return { col: null, dir: 'desc' };
       }
-      return { col, dir: 'asc' };
+      return { col, dir: 'desc' };
     });
   };
 
