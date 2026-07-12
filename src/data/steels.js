@@ -9,7 +9,7 @@ const steels = [
     toughness: 3,
     easeOfSharp: 9,
     maxHardness: { val: 64.5, label: '64–65 HRC' },
-    value: 4,
+    value: 3,
     use: 'Ultra-delicate slicing (Yanagiba/Usuba). Offers the keenest geometric edge possible but chips easily.',
   },
   {
@@ -238,7 +238,7 @@ const steels = [
     sub: 'Hyper-Alloy PM',
     category: 'powder-metallurgy',
     maxSharpness: 8,
-    corrosionRes: 7,
+    corrosionRes: 5,
     edgeRetention: 9,
     toughness: 1,
     easeOfSharp: 1,
