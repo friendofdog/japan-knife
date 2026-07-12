@@ -12,6 +12,7 @@ const en = {
       easeOfSharp: 'Ease of Sharp.',
       maxHardness: 'Max Hardness',
       value: 'Relative Cost',
+      rarity: 'Rarity',
     },
     tableHeaders: {
       steelType: 'Steel Type',
@@ -31,7 +32,7 @@ const en = {
       powderMetallurgy: 'Powder Metallurgy',
     },
   },
-  steels: {
+steels: {
     white1: {
       name: 'White #1',
       sub: 'Shirogami',
@@ -72,12 +73,12 @@ const en = {
       sub: 'Swedish Carbon Steel',
       use: 'Classic monosteel Western-style Japanese chef knives (Yo-Gyuto). Highly favored by high-volume line cooks for its blindingly fast response on a whetstone.',
     },
-    'tamahagane': {
+    tamahagane: {
       name: 'Tamahagane',
       sub: 'Traditional Jewel Steel',
       use: 'Ultra-exclusive collector pieces and custom swords. Culturally significant, forged from iron sands.',
     },
-    'nihonko': {
+    nihonko: {
       name: 'Nihonko',
       sub: 'Standard Japanese Carbon',
       use: 'High-value entry-level butcher knives, Sabaki, and classic Western-handle kitchen utility blades. Provides an affordable path into true carbon steel properties.',
@@ -89,22 +90,17 @@ const en = {
     },
     vg10: {
       name: 'VG-10',
-      sub: 'Takefu Premium',
+      sub: 'V-Gold 10',
       use: 'Mass-market premium home/commercial line Gyutos. Prone to micro-chipping if misused; can feel slightly gummy to sharpen.',
     },
-    // vg1Vg5: {
-    //   name: 'VG-1 / VG-5',
-    //   sub: 'Resilient Stainless',
-    //   use: 'Entry-to-mid level commercial kitchen knives. Harder to chip, making them excellent utility options.',
-    // },
     vg1: {
       name: 'VG-1',
       sub: 'V-Gold Original',
-      use: 'Mid-tier commercial and Western-style Japanese handles. Takes a crisp, bitey edge due to its higher carbon content, but requires mindful cutting to avoid micro-chipping.',
+      use: 'Mid-tier commercial and Western-style Japanese handles. Easy to maintain and highly chip-resistant compared to VG-10, making it an excellent everyday line workhorse.',
     },
     vg5: {
       name: 'VG-5',
-      sub: 'Vanadium Refined Stainless',
+      sub: 'V-Gold Refined',
       use: 'High-volume restaurant line knives and entry-level kitchen cutlery. Infused with vanadium for a uniform grain structure, making it highly resilient against chipping and easy to touch up on stones.',
     },
     ginsan3: {
@@ -127,21 +123,16 @@ const en = {
       sub: 'Aichi Premium',
       use: 'Robust daily prep. A popular alternative to VG-10 providing better overall structural integrity.',
     },
-    'molybdenum': {
+    molybdenum: {
       name: 'Molybdenum',
-      sub: 'Swedish Inox Blends',
+      sub: 'Molybdenum-Vanadium Stainless',
       use: 'High-volume commercial restaurant lines (e.g., Misono, MAC). Prioritizes resilience, speed-sharpening, and stain-immunity.',
     },
-    'sld': {
+    sld: {
       name: 'SLD',
       sub: 'Fine Carbide Die Steel',
       use: 'Versatile all-rounder for Gyutos and Santokus. Finer carbide structure yields a crisp, aggressive edge with good corrosion resistance.',
     },
-    // skdSkd11: {
-    //   name: 'SKD / SKD11',
-    //   sub: 'Coarse Carbide Die Steel',
-    //   use: 'Workhorse for continuous slicing of proteins and vegetables. Massive chromium carbides give exceptional abrasive wear resistance; avoid bones.',
-    // },
     skd: {
       name: 'SKD',
       sub: 'Medium-Chromium Die Steel',
@@ -152,7 +143,7 @@ const en = {
       sub: 'High-Carbon Coarse Die Steel',
       use: 'High-volume commercial workhorses for continuous slicing of heavy proteins and thick vegetables; strictly avoid bones.',
     },
-    'chromax': {
+    chromax: {
       name: 'Chromax',
       sub: 'V/Mo Semi-Stainless',
       use: 'Precision slicing for fine vegetable prep and delicate portioning. Laser-like edge from extreme matrix hardness; prone to chipping if twisted.',
@@ -172,11 +163,6 @@ const en = {
       sub: 'Hitachi Tool PM',
       use: 'High-volume commercial processing. Unrivaled wear resistance and structural toughness among high-HRC choices.',
     },
-    // srs13Srs15: {
-    //   name: 'SRS-13 / SRS-15',
-    //   sub: 'Tungsten PM Blend',
-    //   use: 'Premium multi-purpose chef knives. Known for a crisp, bright cutting action and highly stable edge holding.',
-    // },
     srs13: {
       name: 'SRS-13',
       sub: 'Sanyo PM Stainless',
