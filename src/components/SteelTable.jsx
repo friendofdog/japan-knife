@@ -61,7 +61,7 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                   const isHalf = (9 - val) % 2 !== 0;
                   return (
                     <td key={col.key}>
-                      <span className={`badge ${tier}`}>
+                      <span className={`badge yen ${tier}`}>
                         {'¥'.repeat(fullCount)}
                         {isHalf && '½'}
                       </span>
