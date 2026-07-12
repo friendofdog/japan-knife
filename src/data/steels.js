@@ -1,4 +1,5 @@
 const steels = [
+  // White #1
   {
     key: 'white1',
     category: 'high-carbon',
@@ -11,6 +12,7 @@ const steels = [
     value: 6,
     rarity: 3,
   },
+  // White #2
   {
     key: 'white2',
     category: 'high-carbon',
@@ -23,6 +25,7 @@ const steels = [
     value: 4,
     rarity: 2,
   },
+  // White #3
   {
     key: 'white3',
     category: 'high-carbon',
@@ -35,6 +38,7 @@ const steels = [
     value: 1,
     rarity: 3,
   },
+  // Blue #1
   {
     key: 'blue1',
     category: 'high-carbon',
@@ -47,6 +51,7 @@ const steels = [
     value: 6,
     rarity: 3,
   },
+  // Blue #2
   {
     key: 'blue2',
     category: 'high-carbon',
@@ -59,6 +64,7 @@ const steels = [
     value: 5,
     rarity: 2,
   },
+  // Aogami Super
   {
     key: 'aogamiSuper',
     category: 'high-carbon',
@@ -71,6 +77,7 @@ const steels = [
     value: 7,
     rarity: 4,
   },
+  // V-Toku2
   {
     key: 'vToku2',
     category: 'high-carbon',
@@ -83,6 +90,7 @@ const steels = [
     value: 4,
     rarity: 4,
   },
+  // Sweden-ko
   {
     key: 'swedenKo',
     category: 'high-carbon',
@@ -95,6 +103,7 @@ const steels = [
     value: 4,
     rarity: 3,
   },
+  // Tamahagane
   {
     key: 'tamahagane',
     category: 'high-carbon',
@@ -107,6 +116,7 @@ const steels = [
     value: 8,
     rarity: 5,
   },
+  // Nihonko
   {
     key: 'nihonko',
     category: 'high-carbon',
@@ -119,6 +129,7 @@ const steels = [
     value: 2,
     rarity: 2,
   },
+  // SK Steels
   {
     key: 'skSteels',
     category: 'high-carbon',
@@ -131,6 +142,7 @@ const steels = [
     value: 2,
     rarity: 2,
   },
+  // VG-10
   {
     key: 'vg10',
     category: 'stainless',
@@ -143,6 +155,7 @@ const steels = [
     value: 4,
     rarity: 1,
   },
+  // VG-1 / VG-5
   // {
   //   key: 'vg1Vg5',
   //   category: 'stainless',
@@ -155,6 +168,7 @@ const steels = [
   //   value: 3,
   //   rarity: 2,
   // },
+  // VG-1
   {
     key: 'vg1',
     category: 'stainless',
@@ -167,6 +181,7 @@ const steels = [
     value: 6,
     rarity: 3,
   },
+  // VG-5
   {
     key: 'vg5',
     category: 'stainless',
@@ -179,6 +194,7 @@ const steels = [
     value: 6,
     rarity: 2,
   },
+  // Ginsan #3
   {
     key: 'ginsan3',
     category: 'stainless',
@@ -191,6 +207,7 @@ const steels = [
     value: 5,
     rarity: 2,
   },
+  // Ginsan #5
   {
     key: 'ginsan5',
     category: 'stainless',
@@ -203,6 +220,7 @@ const steels = [
     value: 2,
     rarity: 3,
   },
+  // AUS-8
   {
     key: 'aus8',
     category: 'stainless',
@@ -215,6 +233,7 @@ const steels = [
     value: 2,
     rarity: 1,
   },
+  // AUS-10
   {
     key: 'aus10',
     category: 'stainless',
@@ -227,6 +246,7 @@ const steels = [
     value: 4,
     rarity: 2,
   },
+  // Molybdenum
   {
     key: 'molybdenum',
     category: 'stainless',
@@ -239,6 +259,7 @@ const steels = [
     value: 3,
     rarity: 1,
   },
+  // SLD
   {
     key: 'sld',
     category: 'semi-stainless',
@@ -251,6 +272,7 @@ const steels = [
     value: 5,
     rarity: 3,
   },
+  // SKD / SKD11
   // {
   //   key: 'skdSkd11',
   //   category: 'semi-stainless',
@@ -263,6 +285,7 @@ const steels = [
   //   value: 4,
   //   rarity: 3,
   // },
+  // SKD
   {
     key: 'skd',
     category: 'semi-stainless',
@@ -275,6 +298,7 @@ const steels = [
     value: 5,
     rarity: 3,
   },
+  // SKD11
   {
     key: 'skd11',
     category: 'semi-stainless',
@@ -287,6 +311,7 @@ const steels = [
     value: 5,
     rarity: 3,
   },
+  // Chromax
   {
     key: 'chromax',
     category: 'semi-stainless',
@@ -299,6 +324,7 @@ const steels = [
     value: 6,
     rarity: 4,
   },
+  // SG2 / R2
   {
     key: 'sg2R2',
     category: 'powder-metallurgy',
@@ -311,6 +337,7 @@ const steels = [
     value: 6,
     rarity: 2,
   },
+  // ZDP-189
   {
     key: 'zdp189',
     category: 'powder-metallurgy',
@@ -323,6 +350,7 @@ const steels = [
     value: 7,
     rarity: 5,
   },
+  // HAP-40
   {
     key: 'hap40',
     category: 'powder-metallurgy',
@@ -335,6 +363,7 @@ const steels = [
     value: 7,
     rarity: 4,
   },
+  // SRS-13 / SRS-15
   // {
   //   key: 'srs13Srs15',
   //   category: 'powder-metallurgy',
@@ -347,6 +376,7 @@ const steels = [
   //   value: 6,
   //   rarity: 4,
   // },
+  // SRS-13
   {
     key: 'srs13',
     category: 'powder-metallurgy',
@@ -359,6 +389,7 @@ const steels = [
     value: 3,
     rarity: 4,
   },
+  // SRS-15
   {
     key: 'srs15',
     category: 'powder-metallurgy',
