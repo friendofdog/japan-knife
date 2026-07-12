@@ -92,10 +92,20 @@ const en = {
       sub: 'Takefu Premium',
       use: 'Mass-market premium home/commercial line Gyutos. Prone to micro-chipping if misused; can feel slightly gummy to sharpen.',
     },
-    vg1Vg5: {
-      name: 'VG-1 / VG-5',
-      sub: 'Resilient Stainless',
-      use: 'Entry-to-mid level commercial kitchen knives. Harder to chip, making them excellent utility options.',
+    // vg1Vg5: {
+    //   name: 'VG-1 / VG-5',
+    //   sub: 'Resilient Stainless',
+    //   use: 'Entry-to-mid level commercial kitchen knives. Harder to chip, making them excellent utility options.',
+    // },
+    vg1: {
+      name: 'VG-1',
+      sub: 'V-Gold Original',
+      use: 'Mid-tier commercial and Western-style Japanese handles. Takes a crisp, bitey edge due to its higher carbon content, but requires mindful cutting to avoid micro-chipping.',
+    },
+    vg5: {
+      name: 'VG-5',
+      sub: 'Vanadium Refined Stainless',
+      use: 'High-volume restaurant line knives and entry-level kitchen cutlery. Infused with vanadium for a uniform grain structure, making it highly resilient against chipping and easy to touch up on stones.',
     },
     ginsan3: {
       name: 'Ginsan #3',
@@ -127,10 +137,20 @@ const en = {
       sub: 'Fine Carbide Die Steel',
       use: 'Versatile all-rounder for Gyutos and Santokus. Finer carbide structure yields a crisp, aggressive edge with good corrosion resistance.',
     },
-    skdSkd11: {
-      name: 'SKD / SKD11',
-      sub: 'Coarse Carbide Die Steel',
-      use: 'Workhorse for continuous slicing of proteins and vegetables. Massive chromium carbides give exceptional abrasive wear resistance; avoid bones.',
+    // skdSkd11: {
+    //   name: 'SKD / SKD11',
+    //   sub: 'Coarse Carbide Die Steel',
+    //   use: 'Workhorse for continuous slicing of proteins and vegetables. Massive chromium carbides give exceptional abrasive wear resistance; avoid bones.',
+    // },
+    skd: {
+      name: 'SKD',
+      sub: 'Medium-Chromium Die Steel',
+      use: 'High-end artisan hybrid knives. Delivers traditional high-carbon slicing feedback on whetstones but with slow, highly manageable reactive properties.',
+    },
+    skd11: {
+      name: 'SKD11',
+      sub: 'High-Carbon Coarse Die Steel',
+      use: 'High-volume commercial workhorses for continuous slicing of heavy proteins and thick vegetables; strictly avoid bones.',
     },
     'chromax': {
       name: 'Chromax',
@@ -152,10 +172,20 @@ const en = {
       sub: 'Hitachi Tool PM',
       use: 'High-volume commercial processing. Unrivaled wear resistance and structural toughness among high-HRC choices.',
     },
-    srs13Srs15: {
-      name: 'SRS-13 / SRS-15',
-      sub: 'Tungsten PM Blend',
-      use: 'Premium multi-purpose chef knives. Known for a crisp, bright cutting action and highly stable edge holding.',
+    // srs13Srs15: {
+    //   name: 'SRS-13 / SRS-15',
+    //   sub: 'Tungsten PM Blend',
+    //   use: 'Premium multi-purpose chef knives. Known for a crisp, bright cutting action and highly stable edge holding.',
+    // },
+    srs13: {
+      name: 'SRS-13',
+      sub: 'Sanyo PM Stainless',
+      use: 'Premium all-rounder chef knives. Provides a highly stable, chip-resistant powder steel edge that holds up to fast line work.',
+    },
+    srs15: {
+      name: 'SRS-15',
+      sub: 'Tungsten-Enriched PM',
+      use: 'High-performance luxury slicing and fine dicing. Known for a crisp, incredibly bright cutting action and elite longevity.',
     },
   },
 };
