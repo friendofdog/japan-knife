@@ -1,6 +1,4 @@
 import { CATEGORY_META } from '../constants/categories';
-import Badge from './Badge';
-import { getRating } from '../utils/ratings';
 
 const ICON_BY_CATEGORY = Object.fromEntries(
   CATEGORY_META.map(({ key, icon }) => [key, icon])
@@ -50,19 +48,26 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                     <td key={col.key} className="metric">{val.label}</td>
                   );
                 }
-                const { label, tier } = getRating(col.key, val);
                 if (METER_COLS.has(col.key)) {
                   return (
                     <td key={col.key}>
-                      <meter min={0} max={10} low={3.5} high={7.5} optimum={10} value={val} title={label} />
+                      <meter min={0} max={10} low={3.5} high={7.5} optimum={10} value={val} />
                     </td>
                   );
                 }
-                return (
-                  <td key={col.key}>
-                    <Badge tier={tier} label={label} />
-                  </td>
-                );
+                if (col.key === 'value') {
+                  const tier = val <= 3 ? 'low' : val <= 5 ? 'med' : 'high';
+                  const fullCount = Math.floor((9 - val) / 2);
+                  const isHalf = (9 - val) % 2 !== 0;
+                  return (
+                    <td key={col.key}>
+                      <span className={`badge ${tier}`}>
+                        {'¥'.repeat(fullCount)}
+                        {isHalf && '½'}
+                      </span>
+                    </td>
+                  );
+                }
               })}
               <td>{steel.use}</td>
             </tr>

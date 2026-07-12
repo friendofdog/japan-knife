@@ -9,8 +9,7 @@ const steels = [
     toughness: 3,
     easeOfSharp: 9,
     maxHardness: { val: 64.5, label: '64–65 HRC' },
-    relativeCost: 4,
-    lifespan: 4,
+    value: 4,
     use: 'Ultra-delicate slicing (Yanagiba/Usuba). Offers the keenest geometric edge possible but chips easily.',
   },
   {
@@ -23,8 +22,7 @@ const steels = [
     toughness: 5,
     easeOfSharp: 9,
     maxHardness: { val: 62, label: '61–63 HRC' },
-    relativeCost: 5,
-    lifespan: 4,
+    value: 5,
     use: 'General purpose traditional blades (Gyuto, Santoku). A highly popular, purist workhorse carbon steel.',
   },
   {
@@ -37,8 +35,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 8,
     maxHardness: { val: 59, label: '58–60 HRC' },
-    relativeCost: 8,
-    lifespan: 4,
+    value: 8,
     use: 'Entry-level traditional knives. Highly forgiving to forge and sharpen, structurally stable.',
   },
   {
@@ -51,8 +48,7 @@ const steels = [
     toughness: 4,
     easeOfSharp: 5,
     maxHardness: { val: 63.5, label: '63–64 HRC' },
-    relativeCost: 3,
-    lifespan: 4,
+    value: 3,
     use: 'High-end precision slicing and push-cutting. Holds its candy, biting edge notably longer than White steel.',
   },
   {
@@ -65,8 +61,7 @@ const steels = [
     toughness: 5,
     easeOfSharp: 6,
     maxHardness: { val: 62, label: '61–63 HRC' },
-    relativeCost: 4,
-    lifespan: 4,
+    value: 4,
     use: 'All-around master smith kitchen knives. Incredible balance of edge-life, toughness, and crisp whetstone feedback.',
   },
   {
@@ -79,8 +74,7 @@ const steels = [
     toughness: 5,
     easeOfSharp: 4,
     maxHardness: { val: 64, label: '63–65 HRC' },
-    relativeCost: 2,
-    lifespan: 4,
+    value: 2,
     use: 'Boutique custom knives for extended slicing/dicing sessions. Exceptional peak wear resistance for a carbon steel.',
   },
   {
@@ -93,8 +87,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 9,
     maxHardness: { val: 60, label: '59–61 HRC' },
-    relativeCost: 1,
-    lifespan: 4,
+    value: 1,
     use: 'Ultra-exclusive collector pieces and custom swords. Culturally significant, forged from iron sands.',
   },
   {
@@ -107,8 +100,7 @@ const steels = [
     toughness: 7,
     easeOfSharp: 8,
     maxHardness: { val: 59, label: '58–60 HRC' },
-    relativeCost: 7,
-    lifespan: 3,
+    value: 7,
     use: 'Heavy butchering tools, budget Honesuki, or utility kitchen knives. Highly durable and takes abuse well.',
   },
   {
@@ -121,8 +113,7 @@ const steels = [
     toughness: 4,
     easeOfSharp: 5,
     maxHardness: { val: 61, label: '60–62 HRC' },
-    relativeCost: 5,
-    lifespan: 3,
+    value: 5,
     use: 'Mass-market premium home/commercial line Gyutos. Prone to micro-chipping if misused; can feel slightly gummy to sharpen.',
   },
   {
@@ -135,8 +126,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 6,
     maxHardness: { val: 59, label: '58–60 HRC' },
-    relativeCost: 6,
-    lifespan: 3,
+    value: 6,
     use: 'Entry-to-mid level commercial kitchen knives. Harder to chip, making them excellent utility options.',
   },
   {
@@ -149,8 +139,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 7,
     maxHardness: { val: 60.5, label: '59–62 HRC' },
-    relativeCost: 4,
-    lifespan: 4,
+    value: 4,
     use: 'Professional low-maintenance chef knives. Behave almost identically to carbon steel on whetstones.',
   },
   {
@@ -163,8 +152,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 6,
     maxHardness: { val: 60, label: '59–61 HRC' },
-    relativeCost: 5,
-    lifespan: 3,
+    value: 5,
     use: 'Robust daily prep. A popular alternative to VG-10 providing better overall structural integrity.',
   },
   {
@@ -177,8 +165,7 @@ const steels = [
     toughness: 8,
     easeOfSharp: 8,
     maxHardness: { val: 58, label: '57–59 HRC' },
-    relativeCost: 7,
-    lifespan: 3,
+    value: 7,
     use: 'Introductory culinary school knives or heavy line use. Exceptionally forgiving against impacts and bone contact.',
   },
   {
@@ -191,8 +178,7 @@ const steels = [
     toughness: 7,
     easeOfSharp: 7,
     maxHardness: { val: 57.5, label: '56–59 HRC' },
-    relativeCost: 6,
-    lifespan: 3,
+    value: 6,
     use: 'High-volume commercial restaurant lines (e.g., Misono, MAC). Prioritizes resilience, speed-sharpening, and stain-immunity.',
   },
   {
@@ -205,8 +191,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 5,
     maxHardness: { val: 62, label: '61–63 HRC' },
-    relativeCost: 4,
-    lifespan: 4,
+    value: 4,
     use: 'Versatile all-rounder for Gyutos and Santokus. Finer carbide structure yields a crisp, aggressive edge with good corrosion resistance.',
   },
   {
@@ -219,8 +204,7 @@ const steels = [
     toughness: 5,
     easeOfSharp: 3,
     maxHardness: { val: 61, label: '60–62 HRC' },
-    relativeCost: 5,
-    lifespan: 4,
+    value: 5,
     use: 'Workhorse for continuous slicing of proteins and vegetables. Massive chromium carbides give exceptional abrasive wear resistance; avoid bones.',
   },
   {
@@ -233,8 +217,7 @@ const steels = [
     toughness: 4,
     easeOfSharp: 3,
     maxHardness: { val: 64.5, label: '64–65+ HRC' },
-    relativeCost: 3,
-    lifespan: 3,
+    value: 3,
     use: 'Precision slicing for fine vegetable prep and delicate portioning. Laser-like edge from extreme matrix hardness; prone to chipping if twisted.',
   },
   {
@@ -247,8 +230,7 @@ const steels = [
     toughness: 5,
     easeOfSharp: 5,
     maxHardness: { val: 63, label: '62–64 HRC' },
-    relativeCost: 3,
-    lifespan: 4,
+    value: 3,
     use: 'High-end daily culinary showpieces. Phenomenal edge life mixed with highly consistent refinement across the edge.',
   },
   {
@@ -261,8 +243,7 @@ const steels = [
     toughness: 1,
     easeOfSharp: 1,
     maxHardness: { val: 66, label: '65–67 HRC' },
-    relativeCost: 2,
-    lifespan: 2,
+    value: 2,
     use: 'Strictly delicate slicing. Holds an edge for months, but highly susceptible to brittle fractures if twisted or dropped.',
   },
   {
@@ -275,8 +256,7 @@ const steels = [
     toughness: 7,
     easeOfSharp: 2,
     maxHardness: { val: 65, label: '64–66 HRC' },
-    relativeCost: 2,
-    lifespan: 4,
+    value: 2,
     use: 'High-volume commercial processing. Unrivaled wear resistance and structural toughness among high-HRC choices.',
   },
   {
@@ -289,8 +269,7 @@ const steels = [
     toughness: 6,
     easeOfSharp: 5,
     maxHardness: { val: 63.5, label: '63–64 HRC' },
-    relativeCost: 3,
-    lifespan: 4,
+    value: 3,
     use: 'Premium multi-purpose chef knives. Known for a crisp, bright cutting action and highly stable edge holding.',
   },
 ];

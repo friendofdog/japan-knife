@@ -11,8 +11,7 @@ const COLUMNS = [
   { key: 'toughness', label: 'Toughness' },
   { key: 'easeOfSharp', label: 'Ease of Sharp.' },
   { key: 'maxHardness', label: 'Max Hardness' },
-  { key: 'relativeCost', label: 'Relative Cost' },
-  { key: 'lifespan', label: 'Lifespan' },
+  { key: 'value', label: 'Relative Cost' },
 ];
 
 export default function App() {
