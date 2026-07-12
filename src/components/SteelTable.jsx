@@ -82,6 +82,15 @@ export default function SteelTable({ steels, columns, sort, onSort, locale }) {
                     </td>
                   );
                 }
+                if (col.key === 'rarity') {
+                  return (
+                    <td key={col.key}>
+                      <span className="badge magnifier">
+                        {'🔍'.repeat(val)}
+                      </span>
+                    </td>
+                  );
+                }
               })}
               <td>{steel.use}</td>
             </tr>

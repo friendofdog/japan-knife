@@ -224,7 +224,8 @@ tr:hover td {
 .badge.med  { background-color: var(--med-bg);  color: var(--med-text);  }
 .badge.low  { background-color: var(--low-bg);  color: var(--low-text);  }
 
-.badge.yen  { font-size: 15px; letter-spacing: 3px; }
+.badge.yen       { font-size: 15px; letter-spacing: 3px; }
+.badge.magnifier { font-size: 14px; letter-spacing: 1px; }
 
 .metric {
   font-weight: 600;

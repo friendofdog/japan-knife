@@ -23,6 +23,7 @@ export default function App() {
     { key: 'easeOfSharp', label: locale.ui.columns.easeOfSharp },
     { key: 'maxHardness', label: locale.ui.columns.maxHardness },
     { key: 'value', label: locale.ui.columns.value },
+    { key: 'rarity', label: locale.ui.columns.rarity },
   ], [locale]);
 
   const displayed = useMemo(() => {
@@ -43,7 +44,7 @@ export default function App() {
   }, [locale, category, sort]);
 
   const handleSort = (col) => {
-    const defaultDir = col === 'value' ? 'asc' : 'desc';
+    const defaultDir = (col === 'value' || col === 'rarity') ? 'asc' : 'desc';
     setSort(prev => {
       if (prev.col === col) {
         if (prev.dir === defaultDir) return { col, dir: defaultDir === 'asc' ? 'desc' : 'asc' };
