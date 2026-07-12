@@ -1,5 +1,4 @@
 import { CATEGORY_META } from '../constants/categories';
-import locale from '../locales/en.js';
 
 const ICON_BY_CATEGORY = Object.fromEntries(
   CATEGORY_META.map(({ key, icon }) => [key, icon])
@@ -7,7 +6,7 @@ const ICON_BY_CATEGORY = Object.fromEntries(
 
 const METER_COLS = new Set(['maxSharpness', 'corrosionRes', 'edgeRetention', 'toughness', 'easeOfSharp']);
 
-export default function SteelTable({ steels, columns, sort, onSort }) {
+export default function SteelTable({ steels, columns, sort, onSort, locale }) {
   return (
     <div className="table-container">
       <table>

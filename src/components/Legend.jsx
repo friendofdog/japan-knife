@@ -1,7 +1,6 @@
 import { CATEGORY_META, CATEGORY_TO_LOCALE } from '../constants/categories';
-import locale from '../locales/en.js';
 
-export default function Legend() {
+export default function Legend({ locale }) {
   return (
     <div className="legend">
       {CATEGORY_META.map(({ key, icon }) => (

@@ -77,6 +77,29 @@ select:focus {
   border-color: var(--accent-color);
 }
 
+.lang-switcher {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.lang-btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.lang-btn.active {
+  background: var(--header-bg);
+  color: #fff;
+  border-color: var(--header-bg);
+}
+
 .legend {
   display: flex;
   gap: 20px;
