@@ -1,17 +1,25 @@
 import { useState, useMemo } from 'react';
-import steels from './data/steels.js';
-import { CATEGORIES, CATEGORY_LABELS } from './constants/categories';
+import rawSteels from './data/steels.js';
+import locale from './locales/en.js';
+import { CATEGORIES, CATEGORY_TO_LOCALE } from './constants/categories';
 import Legend from './components/Legend';
 import SteelTable from './components/SteelTable';
 
+const steels = rawSteels.map(s => {
+  if (import.meta.env.DEV && !locale.steels[s.key]) {
+    console.warn('Missing locale for steel key:', s.key);
+  }
+  return { ...s, ...locale.steels[s.key] };
+});
+
 const COLUMNS = [
-  { key: 'maxSharpness', label: 'Max Sharpness' },
-  { key: 'corrosionRes', label: 'Corrosion Res.' },
-  { key: 'edgeRetention', label: 'Edge Retention' },
-  { key: 'toughness', label: 'Toughness' },
-  { key: 'easeOfSharp', label: 'Ease of Sharp.' },
-  { key: 'maxHardness', label: 'Max Hardness' },
-  { key: 'value', label: 'Relative Cost' },
+  { key: 'maxSharpness', label: locale.ui.columns.maxSharpness },
+  { key: 'corrosionRes', label: locale.ui.columns.corrosionRes },
+  { key: 'edgeRetention', label: locale.ui.columns.edgeRetention },
+  { key: 'toughness', label: locale.ui.columns.toughness },
+  { key: 'easeOfSharp', label: locale.ui.columns.easeOfSharp },
+  { key: 'maxHardness', label: locale.ui.columns.maxHardness },
+  { key: 'value', label: locale.ui.columns.value },
 ];
 
 export default function App() {
@@ -48,21 +56,19 @@ export default function App() {
   return (
     <div>
       <header className="site-header">
-        <h1>Japanese Knife Steel Reference Guide</h1>
-        <p className="subtitle">
-          Interactive metallurgical matrix spanning carbon, stainless, semi-stainless, and powder compositions
-        </p>
+        <h1>{locale.ui.siteTitle}</h1>
+        <p className="subtitle">{locale.ui.siteSubtitle}</p>
       </header>
 
       <div className="controls-container">
-        <label htmlFor="categoryFilter">Filter by Category:</label>
+        <label htmlFor="categoryFilter">{locale.ui.filterLabel}</label>
         <select
           id="categoryFilter"
           value={category}
           onChange={e => setCategory(e.target.value)}
         >
-          {Object.entries(CATEGORY_LABELS).map(([val, label]) => (
-            <option key={val} value={val}>{label}</option>
+          {Object.entries(CATEGORY_TO_LOCALE).map(([slug, localeKey]) => (
+            <option key={slug} value={slug}>{locale.ui.categoryLabels[localeKey]}</option>
           ))}
         </select>
       </div>
@@ -72,7 +78,7 @@ export default function App() {
       <SteelTable steels={displayed} columns={COLUMNS} sort={sort} onSort={handleSort} />
 
       <footer className="site-footer">
-        Japanese Knife Steel Performance Matrices • Interactive Reference Chart
+        {locale.ui.footerText}
       </footer>
     </div>
   );

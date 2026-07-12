@@ -1,4 +1,5 @@
 import { CATEGORY_META } from '../constants/categories';
+import locale from '../locales/en.js';
 
 const ICON_BY_CATEGORY = Object.fromEntries(
   CATEGORY_META.map(({ key, icon }) => [key, icon])
@@ -25,7 +26,7 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
         </colgroup>
         <thead>
           <tr>
-            <th>Steel Type</th>
+            <th>{locale.ui.tableHeaders.steelType}</th>
             {columns.map(col => {
               const active = sort.col === col.key;
               const cls = [
@@ -40,7 +41,7 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                 </th>
               );
             })}
-            <th>Intended Use &amp; Characteristics</th>
+            <th>{locale.ui.tableHeaders.intendedUse}</th>
           </tr>
         </thead>
         <tbody>
