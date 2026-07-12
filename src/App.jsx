@@ -35,12 +35,13 @@ export default function App() {
   }, [category, sort]);
 
   const handleSort = (col) => {
+    const defaultDir = col === 'value' ? 'asc' : 'desc';
     setSort(prev => {
       if (prev.col === col) {
-        if (prev.dir === 'desc') return { col, dir: 'asc' };
-        return { col: null, dir: 'desc' };
+        if (prev.dir === defaultDir) return { col, dir: defaultDir === 'asc' ? 'desc' : 'asc' };
+        return { col: null, dir: defaultDir };
       }
-      return { col, dir: 'desc' };
+      return { col, dir: defaultDir };
     });
   };
 

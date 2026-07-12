@@ -56,9 +56,9 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                   );
                 }
                 if (col.key === 'value') {
-                  const tier = val <= 3 ? 'low' : val <= 5 ? 'med' : 'high';
-                  const fullCount = Math.floor((9 - val) / 2);
-                  const isHalf = (9 - val) % 2 !== 0;
+                  const tier = val >= 6 ? 'low' : val >= 4 ? 'med' : 'high';
+                  const fullCount = Math.floor(val / 2);
+                  const isHalf = val % 2 !== 0;
                   return (
                     <td key={col.key}>
                       <span className={`badge yen ${tier}`}>
