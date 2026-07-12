@@ -96,10 +96,12 @@ select:focus {
 }
 
 table {
-  width: 100%;
+  max-width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
   text-align: left;
   font-size: 15px;
+  table-layout: fixed;
 }
 
 th {
@@ -116,6 +118,10 @@ th.sortable {
   position: relative;
   user-select: none;
   padding-right: 24px;
+}
+
+th.meter-col {
+  white-space: normal;
 }
 
 th.sortable:hover {

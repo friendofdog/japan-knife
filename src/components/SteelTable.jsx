@@ -10,6 +10,19 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
   return (
     <div className="table-container">
       <table>
+        <colgroup>
+          <col style={{ width: '160px' }} />
+          {columns.map(col => (
+            <col
+              key={col.key}
+              style={{
+                width: METER_COLS.has(col.key) ? '8%' : 'auto',
+                minWidth: '90px'
+              }}
+            />
+          ))}
+          <col style={{ width: 'auto' }} />
+        </colgroup>
         <thead>
           <tr>
             <th>Steel Type</th>
@@ -17,6 +30,7 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
               const active = sort.col === col.key;
               const cls = [
                 'sortable',
+                METER_COLS.has(col.key) && 'meter-col',
                 active && sort.dir === 'asc' && 'sort-asc',
                 active && sort.dir === 'desc' && 'sort-desc',
               ].filter(Boolean).join(' ');
@@ -50,7 +64,7 @@ export default function SteelTable({ steels, columns, sort, onSort }) {
                 }
                 if (METER_COLS.has(col.key)) {
                   return (
-                    <td key={col.key}>
+                    <td key={col.key} className="meter-col">
                       <meter min={0} max={10} low={3.5} high={7.5} optimum={10} value={val} />
                     </td>
                   );
